@@ -1,3 +1,14 @@
+import { StyleSheet, Text, View } from 'react-native'
+const SignUp = () => {
+  return (
+    <View>
+      <Text>SignUp</Text>
+    </View>
+  )
+}
+export default SignUp
+const styles = StyleSheet.create({})
+
 // import { useState } from 'react'
 // import { Link, router } from 'expo-router'
 // import { SafeAreaView } from 'react-native-safe-area-context'
