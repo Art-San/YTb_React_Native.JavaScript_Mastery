@@ -4,7 +4,7 @@ import { images } from '../constants'
 import { Redirect, router } from 'expo-router'
 import { Image, ScrollView, Text, View } from 'react-native'
 import { CustomButton } from '../components'
-
+// com.gruzz.aora
 export default function App() {
   return (
     <SafeAreaView className="bg-primary h-full">
