@@ -4,6 +4,7 @@ import { images } from '../../constants'
 import { CustomButton, FormField } from '../../components'
 import { useState } from 'react'
 import { Link } from 'expo-router'
+import { signIn } from '../../lib/appwrite'
 const SignIn = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
@@ -14,17 +15,18 @@ const SignIn = () => {
   const submit = async () => {
     if (form.email === '' || form.password === '') {
       Alert.alert('Ошибка', 'Пожалуйста, заполните все поля')
+      return
     }
     setSubmitting(true)
 
     try {
       await signIn(form.email, form.password)
-      const result = await getCurrentUser()
-      setUser(result)
-      setIsLogged(true)
+      // const result = await getCurrentUser()
+      // setUser(result)
+      // setIsLogged(true)
 
-      Alert.alert('Success', 'User signed in successfully')
-      router.replace('/home')
+      Alert.alert('Success', 'Пользователь успешно вошел в систему')
+      // router.replace('/home')
     } catch (error) {
       Alert.alert('Error', error.message)
     } finally {

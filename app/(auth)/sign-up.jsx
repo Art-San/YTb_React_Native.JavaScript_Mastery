@@ -7,6 +7,7 @@ import { images } from '../../constants'
 // import { createUser } from '../../lib/appwrite'
 import { CustomButton, FormField } from '../../components'
 import { createUser } from '../../lib/appwrite'
+import { errorTranslations } from './translationErr'
 // import { useGlobalContext } from '../../context/GlobalProvider'
 
 const SignUp = () => {
@@ -19,29 +20,24 @@ const SignUp = () => {
     password: ''
   })
 
-  const errorTranslations = {
-    'AppwriteException: Invalid `password` param: Password must be between 8 and 265 characters long, and should not be one of the commonly used password.':
-      'Ошибка: Пароль должен быть от 8 до 265 символов и не должен быть одним из часто используемых паролей.',
-    'AppwriteException: Rate limit for the current endpoint has been exceeded. Please try again after some time.':
-      'Превышен предел скорости для текущей конечной точки. Пожалуйста, повторите попытку через некоторое время.',
-    'AppwriteException: Invalid `email` param: Value must be a valid email address':
-      'неверный параметр «email»: значение должно быть действительным адресом электронной почты.'
-  }
   const submit = async () => {
     if (form.username === '' || form.email === '' || form.password === '') {
-      Alert.alert('Error', 'Please fill in all fields')
+      Alert.alert('Error', 'Пожалуйста, заполните все поля')
+      return
     }
 
     setSubmitting(true)
     try {
-      // createUser()
       const result = await createUser(form.email, form.password, form.username)
-      setUser(result)
-      setIsLogged(true)
+
+      // setUser(result)
+      // setIsLogged(true)
 
       router.replace('/home')
+      console.log(2, 'регистрация успешно')
     } catch (error) {
-      console.log(0, error.message)
+      console.log(0, 'Ошибка', error.message)
+
       const errorMessage = errorTranslations[error.message] || error.message
       Alert.alert('Ошибка', errorMessage)
       // Alert.alert('Error', error.message)
