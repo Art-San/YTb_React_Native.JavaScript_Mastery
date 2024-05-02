@@ -1,9 +1,10 @@
+import { Link, router } from 'expo-router'
 import { Image, ScrollView, Text, View, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../constants'
 import { CustomButton, FormField } from '../../components'
 import { useState } from 'react'
-import { Link } from 'expo-router'
+
 import { getCurrentUser, signIn } from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
 import { errorSignIn } from './translationErr'
