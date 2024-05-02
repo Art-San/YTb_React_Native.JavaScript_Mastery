@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
+
+import { SafeAreaView } from 'react-native-safe-area-context'
 const Create = () => {
   return (
-    <View>
-      <Text>create</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>create</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 export default Create

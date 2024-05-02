@@ -7,7 +7,7 @@ import { images } from '../../constants'
 // import { createUser } from '../../lib/appwrite'
 import { CustomButton, FormField } from '../../components'
 import { createUser } from '../../lib/appwrite'
-import { errorTranslations } from './translationErr'
+import { errorSignUp } from './translationErr'
 // import { useGlobalContext } from '../../context/GlobalProvider'
 
 const SignUp = () => {
@@ -30,16 +30,16 @@ const SignUp = () => {
     try {
       const result = await createUser(form.email, form.password, form.username)
 
-      // setUser(result)
-      // setIsLogged(true)
+      setUser(result)
+      setIsLogged(true)
 
       router.replace('/home')
       console.log(2, 'регистрация успешно')
     } catch (error) {
-      console.log(0, 'Ошибка', error.message)
+      console.log(0, 'SignUp Ошибка', error.message)
 
-      const errorMessage = errorTranslations[error.message] || error.message
-      Alert.alert('Ошибка', errorMessage)
+      const errorMessage = errorSignUp[error.message] || error.message
+      Alert.alert('SignUp Ошибка', errorMessage)
       // Alert.alert('Error', error.message)
     } finally {
       setSubmitting(false)

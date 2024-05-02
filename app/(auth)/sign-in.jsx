@@ -4,8 +4,11 @@ import { images } from '../../constants'
 import { CustomButton, FormField } from '../../components'
 import { useState } from 'react'
 import { Link } from 'expo-router'
-import { signIn } from '../../lib/appwrite'
+import { getCurrentUser, signIn } from '../../lib/appwrite'
+import { useGlobalContext } from '../../context/GlobalProvider'
+import { errorSignIn } from './translationErr'
 const SignIn = () => {
+  const { setUser, setIsLogged } = useGlobalContext()
   const [isSubmitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
     email: '',
@@ -21,14 +24,18 @@ const SignIn = () => {
 
     try {
       await signIn(form.email, form.password)
-      // const result = await getCurrentUser()
-      // setUser(result)
-      // setIsLogged(true)
+      const result = await getCurrentUser()
+      setUser(result)
+      setIsLogged(true)
 
       Alert.alert('Success', 'Пользователь успешно вошел в систему')
-      // router.replace('/home')
+      router.replace('/home')
     } catch (error) {
-      Alert.alert('Error', error.message)
+      console.log(0, 'SignIn Ошибка', error.message)
+
+      const errorMessage = errorSignIn[error.message] || error.message
+      Alert.alert('SignIn Ошибка', errorMessage)
+      // Alert.alert('Error', error.message)
     } finally {
       setSubmitting(false)
     }
