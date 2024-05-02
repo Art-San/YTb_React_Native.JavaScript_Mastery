@@ -8,5 +8,7 @@ export const errorTranslations = {
   'AppwriteException: Invalid document structure: Missing required attribute "accountid"':
     'неверная структура документа: отсутствует обязательный атрибут «accountid»',
   'AppwriteException: A user with the same id, email, or phone already exists in this project.':
-    'пользователь с таким идентификатором, адресом электронной почты или телефоном уже существует в этом проекте.'
+    'пользователь с таким идентификатором, адресом электронной почты или телефоном уже существует в этом проекте.',
+  'Error: AppwriteException: Creation of a session is prohibited when a session is active.':
+    'Создание сеанса запрещено, когда сеанс активен.'
 }

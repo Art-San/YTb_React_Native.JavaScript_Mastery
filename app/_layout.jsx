@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
+import GlobalProvider from '../context/GlobalProvider'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -35,48 +36,18 @@ const RooyLayout = () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen
-        name="index"
-        options={{ headerShown: false }} // убирает заголовок от путей
-      />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="search" options={{ headerShown: false }} /> */}
-    </Stack>
+    <GlobalProvider>
+      <Stack>
+        <Stack.Screen
+          name="index"
+          options={{ headerShown: false }} // убирает заголовок от путей
+        />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* <Stack.Screen name="search/[query]" options={{ headerShown: false }} /> */}
+      </Stack>
+    </GlobalProvider>
   )
 }
 
 export default RooyLayout
-// import { StyleSheet, Text, View } from 'react-native'
-// import { Slot } from 'expo-router'
-
-// const RooyLayout = () => {
-//   return (
-//     <>
-//       <Text>Header</Text>
-//       <Slot />
-//       <Text>Footer</Text>
-//     </>
-//   )
-// }
-
-// export default RooyLayout
-
-// import { StyleSheet, Text, View } from 'react-native'
-// const _layout = () => {
-//   return (
-//     <View style={styles.container}>
-//       <Text>_layout</Text>
-//     </View>
-//   )
-// }
-// export default _layout
-// const styles = StyleSheet.create({
-//   container: {
-//     display: 'flex',
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center'
-//   }
-// })
