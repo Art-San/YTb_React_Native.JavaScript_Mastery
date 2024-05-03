@@ -2,40 +2,55 @@ import { FlatList, Image, RefreshControl, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../constants'
 
-// import useAppwrite from '../../lib/useAppwrite'
-// import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
+import useAppwrite from '../../lib/useAppwrite'
 
-import { SearchInput, Trending, EmptyState } from '../../components'
+import { SearchInput, Trending, EmptyState, VideoCard } from '../../components'
 import { useState } from 'react'
+import { getAllPosts } from '../../lib/appwrite'
 
 const Home = () => {
-  // const { data: posts, refetch } = useAppwrite(getAllPosts)
+  // Унесли в отдельный хук
+  // const [data, setData] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true)
+
+  //     try {
+  //       const response = await getAllPosts()
+  //       setData(response)
+  //     } catch (error) {
+  //       console.log(0, 'Home', error.message)
+  //       Alert.alert('Error', error.message)
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [])
+
+  const { data: posts, refetch } = useAppwrite(getAllPosts)
   // const { data: latestPosts } = useAppwrite(getLatestPosts)
 
-  // console.log(11, posts)
+  console.log(11, 'Home posts', posts)
 
   const [refreshing, setRefreshing] = useState(false)
 
   const onRefresh = async () => {
     setRefreshing(true)
-
+    await refetch()
     setRefreshing(false)
   }
-  // const onRefresh = async () => {
-  //   setRefreshing(true)
-  //   await refetch()
-  //   setRefreshing(false)
-  // }
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         // data={[]}
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-slate-50">{item.id}</Text>
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
@@ -52,7 +67,7 @@ const Home = () => {
                 <Image
                   source={images.logoSmall}
                   className="w-9 h-10"
-                  // resizeMode="contain"
+                  resizeMode="contain"
                 />
               </View>
             </View>
