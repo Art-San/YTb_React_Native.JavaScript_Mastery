@@ -7,6 +7,7 @@ import useAppwrite from '../../lib/useAppwrite'
 import { SearchInput, Trending, EmptyState, VideoCard } from '../../components'
 import { useState } from 'react'
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
+import { StatusBar } from 'expo-status-bar'
 
 const Home = () => {
   // Унесли в отдельный хук
@@ -32,8 +33,6 @@ const Home = () => {
 
   const { data: posts, refetch } = useAppwrite(getAllPosts)
   const { data: latestPosts } = useAppwrite(getLatestPosts)
-
-  console.log(11, 'Home latestPosts ', latestPosts)
 
   const [refreshing, setRefreshing] = useState(false)
 

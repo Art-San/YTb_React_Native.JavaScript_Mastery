@@ -6,12 +6,12 @@ import { Video, ResizeMode } from 'expo-av'
 const VideoCard = ({
   video: {
     title,
-    thumbrall,
+    thumbnail,
     video,
     creator: { username, avatar }
   }
 }) => {
-  // console.log(12, 'thumbnail', thumbrall)
+  thumbnail
   const [play, setPlay] = useState(false)
   return (
     <View className="flex flex-col items-center px-4 mb-14">
@@ -63,7 +63,7 @@ const VideoCard = ({
           className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
         >
           <Image
-            source={{ uri: thumbrall }}
+            source={{ uri: thumbnail }}
             className="w-full h-full rounded-xl mt-3"
             resizeMode="cover"
           />
