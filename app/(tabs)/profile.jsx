@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
+// 3:24:00
 const Profile = () => {
   return (
     <View>
