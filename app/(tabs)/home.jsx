@@ -6,7 +6,7 @@ import useAppwrite from '../../lib/useAppwrite'
 
 import { SearchInput, Trending, EmptyState, VideoCard } from '../../components'
 import { useState } from 'react'
-import { getAllPosts } from '../../lib/appwrite'
+import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 
 const Home = () => {
   // Унесли в отдельный хук
@@ -31,9 +31,9 @@ const Home = () => {
   // }, [])
 
   const { data: posts, refetch } = useAppwrite(getAllPosts)
-  // const { data: latestPosts } = useAppwrite(getLatestPosts)
+  const { data: latestPosts } = useAppwrite(getLatestPosts)
 
-  console.log(11, 'Home posts', posts)
+  console.log(11, 'Home latestPosts ', latestPosts)
 
   const [refreshing, setRefreshing] = useState(false)
 
@@ -79,8 +79,8 @@ const Home = () => {
                 Latest Videos
               </Text>
 
-              {/* <Trending posts={latestPosts ?? []} /> */}
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
+              {/* <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} /> */}
             </View>
           </View>
         )}
