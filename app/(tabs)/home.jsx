@@ -39,6 +39,7 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
 
   const onRefresh = async () => {
+    console.log(11, 'onRefresh')
     setRefreshing(true)
     await refetch()
     setRefreshing(false)
