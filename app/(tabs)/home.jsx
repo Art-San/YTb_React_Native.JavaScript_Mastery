@@ -8,6 +8,7 @@ import { SearchInput, Trending, EmptyState, VideoCard } from '../../components'
 import { useState } from 'react'
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import { StatusBar } from 'expo-status-bar'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
 const Home = () => {
   // Унесли в отдельный хук
@@ -33,6 +34,7 @@ const Home = () => {
 
   const { data: posts, refetch } = useAppwrite(getAllPosts)
   const { data: latestPosts } = useAppwrite(getLatestPosts)
+  const { user } = useGlobalContext()
 
   const [refreshing, setRefreshing] = useState(false)
 
@@ -58,7 +60,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  JSMastery
+                  {user?.username}
                 </Text>
               </View>
 
