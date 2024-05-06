@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { CustomButton, FormField } from '../../components'
 import { useGlobalContext } from '../../context/GlobalProvider'
 import { useState } from 'react'
+import { router } from 'expo-router'
 import { ResizeMode, Video } from 'expo-av'
 import { icons } from '../../constants'
 import { createVideoPost } from '../../lib/appwrite'
@@ -32,10 +33,11 @@ const Create = () => {
     const result = await DocumentPicker.getDocumentAsync({
       type:
         selectType === 'image'
-          ? ['image/png', 'image/jpg']
+          ? ['image/png', 'image/jpeg', 'image/jpg']
           : ['video/mp4', 'video/gif']
     })
 
+    console.log(11, 'result', result)
     if (!result.canceled) {
       if (selectType === 'image') {
         setForm({
@@ -69,12 +71,15 @@ const Create = () => {
 
     setUploading(true)
     try {
-      await createVideoPost({
+      const res = await createVideoPost({
         ...form,
         userId: user.$id
       })
 
-      Alert.alert('Success', 'Пост успешно загружен')
+      if (res) {
+        Alert.alert('Success', 'Пост успешно загружен')
+      }
+
       router.push('/home')
     } catch (error) {
       console.log(0, 'Error Create-screen', error.message)
